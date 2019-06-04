@@ -4,7 +4,7 @@ import java.time.Clock;
 import java.time.Instant;
 import java.time.ZoneId;
 
-public class MockClock extends Clock {
+public class FakeClock extends Clock {
 
     private long clockOffset;
 

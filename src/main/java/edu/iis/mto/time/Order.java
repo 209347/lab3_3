@@ -12,9 +12,12 @@ public class Order {
 	private State orderState;
 	private List<OrderItem> items = new ArrayList<OrderItem>();
 	private Instant subbmitionDate;
-	private MockClock mockClock = new MockClock();
+	private FakeClock fakeClock = new FakeClock();
+	private long clockOffset;
 
-	public Order() {
+	public Order(long clockOffset) {
+		this.clockOffset = clockOffset;
+		fakeClock.setClockOffset(clockOffset);
 		orderState = State.CREATED;
 	}
 
@@ -30,8 +33,7 @@ public class Order {
 		requireState(State.CREATED);
 
 		orderState = State.SUBMITTED;
-		mockClock.setClockOffset(-90000);
-		subbmitionDate = mockClock.instantWithOffset();
+		subbmitionDate = fakeClock.instantWithOffset();
 
 	}
 
